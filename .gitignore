@@ -1,0 +1,16 @@
+# 1. BẢO VỆ DỮ LIỆU NẶNG: Chặn tuyệt đối thư mục data tải lên mạng
+data/
+
+# 2. CHẶN FILE MÔI TRƯỜNG ẢO (Nếu bạn có dùng)
+venv/
+env/
+
+# 3. CHẶN FILE RÁC CỦA PYTHON (Sinh ra lúc chạy code)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 4. CHẶN FILE HỆ THỐNG CỦA WINDOWS / MAC
+.DS_Store
+Thumbs.db
