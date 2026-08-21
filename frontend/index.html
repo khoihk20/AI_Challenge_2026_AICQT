@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Retrieval - Search UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <h1>Video Retrieval</h1>
+        <p class="sub">
+          Tìm keyframe bằng câu mô tả tiếng Việt hoặc English
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <form class="search-bar" id="searchForm">
+          <input
+            type="text"
+            id="queryInput"
+            placeholder="vd: một người đàn ông đang dùng laptop / a car on the street"
+            autocomplete="off"
+          />
+          <button type="submit" id="searchBtn">Search</button>
+        </form>
+
+        <div class="controls">
+          <div class="control-group">
+            <label class="title" for="topkRange">Số kết quả (top_k)</label>
+            <div class="topk-row">
+              <input
+                type="range"
+                id="topkRange"
+                min="1"
+                max="100"
+                step="1"
+                value="20"
+              />
+              <input
+                type="number"
+                id="topkNumber"
+                min="1"
+                max="100"
+                value="20"
+              />
+            </div>
+          </div>
+
+          <div class="control-group grow">
+            <label class="title">
+              Lọc theo object <span class="filter-mode">có đủ tất cả (AND)</span>
+              <span class="mock-note" id="objectNote">API chưa hỗ trợ field này</span>
+            </label>
+            <div class="objects" id="objectFilters"></div>
+            <button type="button" class="link-btn" id="clearFilters">
+              Bỏ chọn tất cả
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="status" id="status">
+        <span>Chưa có kết quả. Nhập query rồi bấm Search.</span>
+      </div>
+      <div class="grid" id="grid"></div>
+    </main>
+
+    <!-- Khu vực debug: chỉ dùng để thử filter trước khi backend có field objects -->
+    <div class="debug-dock">
+      <button type="button" id="debugToggle" class="debug-btn">
+        Test chế độ Object thật
+      </button>
+      <button type="button" id="debugOff" class="debug-btn debug-btn-off" hidden>
+        Tắt chế độ test
+      </button>
+      <span class="debug-state" id="debugState" hidden>chế độ test đang BẬT</span>
+    </div>
+
+    <div class="modal" id="modal" hidden>
+      <button class="modal-close" id="modalClose" aria-label="Đóng">
+        &times;
+      </button>
+      <div class="modal-inner">
+        <img id="modalImg" alt="" />
+        <div class="modal-info" id="modalInfo"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -67,6 +67,12 @@ def search(query: str, top_k: int = 20):
         text_features = model.get_text_features(**inputs)
     
     # Chuẩn hóa Vector và cho FAISS tìm kiếm
+    if hasattr(text_features, "text_embeds"):
+        text_features = text_features.text_embeds
+    elif hasattr(text_features, "pooler_output"):
+        text_features = text_features.pooler_output
+    elif hasattr(text_features, "last_hidden_state"):
+        text_features = text_features.last_hidden_state.mean(dim=1)
     text_features = text_features.numpy().astype("float32")
     faiss.normalize_L2(text_features)
     distances, indices = index.search(text_features, top_k)
